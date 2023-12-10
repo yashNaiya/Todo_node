@@ -90,3 +90,15 @@ app.post('/addToList', (req, res) => {
     }
     res.send()
 })
+
+app.post('/removeFromList',(req,res)=>{
+    const {userId, detail} = req.body;
+    Users.findOneAndUpdate({ _id: new mongoose.Types.ObjectId(userId) }, { $pull: { list: { title: "item", detail:detail } } })
+    .then(user => {
+        
+    })
+    .catch(err => {
+        res.send(err)
+    })
+    res.send()
+})
